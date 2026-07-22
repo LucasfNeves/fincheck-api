@@ -1,1 +1,0 @@
-# fincheck-api
