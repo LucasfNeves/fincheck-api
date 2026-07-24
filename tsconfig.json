@@ -1,27 +1,40 @@
 {
   "compilerOptions": {
-    "ignoreDeprecations": "6.0",
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "resolvePackageJsonExports": true,
-    "esModuleInterop": true,
-    "isolatedModules": true,
-    "declaration": true,
-    "removeComments": true,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ES2023",
+    "lib": ["ES2023"],
+
+    // Decorators (obrigatório pro Nest)
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+
+    // Interop / imports
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "target": "ES2023",
-    "sourceMap": true,
+    "forceConsistentCasingInFileNames": true,
+
+    // Output
     "outDir": "./dist",
     "baseUrl": "./",
+    "declaration": true,
+    "sourceMap": true,
+    "removeComments": true,
     "incremental": true,
-    "skipLibCheck": true,
-    "strictNullChecks": true,
-    "forceConsistentCasingInFileNames": true,
+
+    // Strictness — escolha UM estilo, não misture
+    "strict": false,
     "noImplicitAny": false,
+    "strictNullChecks": true,
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
-    "strict": true,
+
+    // Performance / compat
+    "skipLibCheck": true,
+    "isolatedModules": true,
+
+    "ignoreDeprecations": "6.0",
+
+    "types": ["jest", "node"]
   }
 }
