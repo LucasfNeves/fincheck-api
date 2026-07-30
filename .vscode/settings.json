@@ -1,0 +1,52 @@
+{
+  // O projeto usa TypeScript 6.x; o VS Code vem com um 5.x embutido.
+  // Isso aponta o editor para o TS do node_modules, alinhando os erros
+  // do IntelliSense com os do `pnpm build`.
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+
+  // ---------------------------------------------------------------------
+  // Indentação: 2 espaços, sempre.
+  // `detectIndentation: false` é o ponto crítico — sem isso o VS Code
+  // "adivinha" a indentação pelo arquivo aberto e volta a escrever 4
+  // espaços em arquivos legados.
+  // ---------------------------------------------------------------------
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+
+  // ---------------------------------------------------------------------
+  // Formatação: o Prettier é o ÚNICO formatador. O ESLint só corrige
+  // regras de qualidade de código (promises, unused vars, etc.).
+  // ---------------------------------------------------------------------
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+
+  "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[json]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[jsonc]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[yaml]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[markdown]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+
+  "prettier.requireConfig": true,
+  "eslint.useFlatConfig": true,
+  "eslint.validate": ["javascript", "typescript"],
+
+  // Código gerado pelo Prisma: fora do watcher e da busca.
+  "files.watcherExclude": {
+    "**/src/generated/**": true,
+    "**/dist/**": true
+  },
+  "search.exclude": {
+    "**/src/generated": true,
+    "**/dist": true,
+    "**/pnpm-lock.yaml": true
+  }
+}

@@ -1,0 +1,9 @@
+node_modules
+dist
+build
+coverage
+
+# Código gerado pelo Prisma — não formatar
+src/generated
+
+pnpm-lock.yaml

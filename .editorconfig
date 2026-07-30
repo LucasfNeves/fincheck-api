@@ -1,0 +1,21 @@
+### Fonte da verdade da indentação para QUALQUER editor.
+### Mantido em sincronia com o .prettierrc (tabWidth: 2, endOfLine: lf).
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 2
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Markdown usa espaços no fim da linha para quebra de linha.
+[*.md]
+trim_trailing_whitespace = false
+
+[*.{yml,yaml}]
+indent_size = 2
+
+[pnpm-lock.yaml]
+indent_size = unset

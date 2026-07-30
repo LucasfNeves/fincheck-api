@@ -1,4 +1,4 @@
-import { User } from '../entities/user.entity.js';
+import { User } from '../../../entities/user.entity.js';
 
 export interface CategoryData {
   name: string;
@@ -17,4 +17,6 @@ export abstract class UsersRepository {
   abstract emailExists(email: string): Promise<boolean>;
 
   abstract create(data: CreateUserData): Promise<User>;
+
+  abstract findUniqueByEmail(email: string): Promise<User | null>;
 }

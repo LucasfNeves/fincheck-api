@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { User } from '../../../modules/users/entities/user.entity.js';
+import { User } from '../../../entities/user.entity.js';
 import {
   CreateUserData,
   UsersRepository,
-} from '../../../modules/users/repositories/users-repository.js';
-import { PrismaService } from '../prisma.service.js';
+} from '../interfaces/users-repository.js';
+import { PrismaService } from '../../prisma.service.js';
 
 @Injectable()
 export class PrismaUsersRepository implements UsersRepository {
@@ -28,5 +28,13 @@ export class PrismaUsersRepository implements UsersRepository {
         },
       },
     });
+  }
+
+  async findUniqueByEmail(email: string): Promise<User | null> {
+    const user = await this.prismaService.user.findUnique({
+      where: { email },
+    });
+
+    return user;
   }
 }
