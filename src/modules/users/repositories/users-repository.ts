@@ -13,10 +13,6 @@ export interface CreateUserData {
   categories: CategoryData[];
 }
 
-/**
- * Contrato de persistência de usuários. Vive no módulo de domínio: quem
- * implementa (infra) é que depende daqui, nunca o contrário.
- */
 export abstract class UsersRepository {
   abstract emailExists(email: string): Promise<boolean>;
 
