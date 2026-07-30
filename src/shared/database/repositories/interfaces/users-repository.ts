@@ -13,10 +13,14 @@ export interface CreateUserData {
   categories: CategoryData[];
 }
 
+export type UserProfile = Pick<User, 'id' | 'name' | 'email'>;
+
 export abstract class UsersRepository {
   abstract emailExists(email: string): Promise<boolean>;
 
   abstract create(data: CreateUserData): Promise<User>;
 
   abstract findUniqueByEmail(email: string): Promise<User | null>;
+
+  abstract findProfileById(userId: string): Promise<UserProfile | null>;
 }

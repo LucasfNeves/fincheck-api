@@ -47,12 +47,16 @@ export class AuthService {
 
     const hashedPassword = await hash(password, 12);
 
-    return this.usersRepository.create({
+    const createdUser = await this.usersRepository.create({
       name,
       email,
       password: hashedPassword,
       categories: DEFAULT_CATEGORIES,
     });
+
+    const accessToken = await this._generateAccessToken(createdUser.id);
+
+    return { accessToken };
   }
 
   async authenticate({ email, password }: AuthenticateDto) {
@@ -69,8 +73,12 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    const accessToken = await this.jwtService.signAsync({ sub: user.id });
+    const accessToken = await this._generateAccessToken(user.id);
 
     return { accessToken };
+  }
+
+  private _generateAccessToken(userId: string) {
+    return this.jwtService.signAsync({ sub: userId });
   }
 }
