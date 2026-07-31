@@ -13,6 +13,9 @@ export class UsersService implements UsersServiceContract {
       throw new NotFoundException('User not found');
     }
 
-    return user;
+    return {
+      name: user.name,
+      email: user.email,
+    };
   }
 }

@@ -11,6 +11,7 @@ import {
 import { compare, hash } from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from './dto/create-user.dto.js';
+import { ActiveUserId } from 'src/shared/decorators/ActiveUserId.js';
 
 const DEFAULT_CATEGORIES: CategoryData[] = [
   // Income
@@ -62,7 +63,6 @@ export class AuthService {
   async authenticate({ email, password }: AuthenticateDto) {
     const user = await this.usersRepository.findUniqueByEmail(email);
 
-    console.log(user);
     if (!user) {
       throw new UnauthorizedException('Invalid credentials');
     }
