@@ -13,8 +13,6 @@ export const ActiveUserId = createParamDecorator<{ userId: string }>(
     const request = context.switchToHttp().getRequest<AuthenticatedRequest>();
     const userId = request.userId;
 
-    console.log('Active user ID:', userId);
-
     if (!userId) {
       throw new UnauthorizedException('User ID not found in request');
     }

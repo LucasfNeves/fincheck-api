@@ -1,16 +1,11 @@
-import { User } from '../../../entities/user.entity.js';
-
-export interface CategoryData {
-  name: string;
-  icon: string;
-  type: 'INCOME' | 'EXPENSE';
-}
+import { User } from 'src/modules/users/entities/user.entity.js';
+import { CreateCategoryData } from './categories.repository.js';
 
 export interface CreateUserData {
   name: string;
   email: string;
   password: string;
-  categories: CategoryData[];
+  categories: CreateCategoryData[];
 }
 
 export type UserProfile = Pick<User, 'name' | 'email'>;

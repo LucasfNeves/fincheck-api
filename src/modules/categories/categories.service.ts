@@ -1,10 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CategoriesContract } from './interface/categories.interface.js';
-import {
-  CategoryData,
-  UsersRepository,
-} from 'src/shared/database/repositories/interfaces/users.repository.js';
+import { UsersRepository } from 'src/shared/database/repositories/interfaces/users.repository.js';
 import { CategoriesRepositoryContract } from 'src/shared/database/repositories/interfaces/categories.repository.js';
+import { Category } from './entities/category.entity.js';
 
 @Injectable()
 export class CategoriesService implements CategoriesContract {
@@ -12,7 +10,8 @@ export class CategoriesService implements CategoriesContract {
     private readonly categoriesRepository: CategoriesRepositoryContract,
     private readonly usersRepository: UsersRepository,
   ) {}
-  async findAll(userId: string): Promise<CategoryData[]> {
+
+  async findAll(userId: string): Promise<Category[]> {
     const userExists = await this.usersRepository.findProfileById(userId);
 
     if (!userExists) {

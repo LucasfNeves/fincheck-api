@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { User } from '../../../entities/user.entity.js';
+import { User } from 'src/modules/users/entities/user.entity.js';
 import {
   CreateUserData,
   UserProfile,
@@ -50,7 +50,7 @@ export class PrismaUsersRepository implements UsersRepository {
   async findProfileById(userId: string): Promise<UserProfile | null> {
     const user = await this.prismaService.user.findUnique({
       where: { id: userId },
-      select: { id: true, name: true, email: true },
+      select: { name: true, email: true },
     });
 
     return user;

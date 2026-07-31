@@ -1,5 +1,5 @@
-import { CategoryData } from 'src/shared/database/repositories/interfaces/users.repository.js';
+import { Category } from '../entities/category.entity.js';
 
 export abstract class CategoriesContract {
-  abstract findAll(userId: string): Promise<CategoryData[]>;
+  abstract findAll(userId: string): Promise<Category[]>;
 }

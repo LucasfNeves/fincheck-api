@@ -1,21 +1,26 @@
 import { Injectable } from '@nestjs/common';
-import { CategoryData } from '../interfaces/users.repository.js';
+import { Category } from 'src/modules/categories/entities/category.entity.js';
 import { PrismaService } from '../../prisma.service.js';
 import { CategoriesRepositoryContract } from '../interfaces/categories.repository.js';
+
+const CATEGORY_SELECT = {
+  id: true,
+  userId: true,
+  name: true,
+  icon: true,
+  type: true,
+} as const;
 
 @Injectable()
 export class PrismaCategoriesRepository implements CategoriesRepositoryContract {
   constructor(private readonly prismaService: PrismaService) {}
 
-  findAllCategories(userId: string): Promise<CategoryData[]> {
-    return this.prismaService.category.findMany({
+  async findAllCategories(userId: string): Promise<Category[]> {
+    const categories = await this.prismaService.category.findMany({
       where: { userId },
-      select: {
-        id: true,
-        name: true,
-        icon: true,
-        type: true,
-      },
+      select: CATEGORY_SELECT,
     });
+
+    return categories as Category[];
   }
 }

@@ -4,30 +4,29 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { AuthenticateDto } from './dto/authenticate.dto.js';
-import {
-  CategoryData,
-  UsersRepository,
-} from '../../shared/database/repositories/interfaces/users.repository.js';
+import { UsersRepository } from '../../shared/database/repositories/interfaces/users.repository.js';
+import { CreateCategoryData } from '../../shared/database/repositories/interfaces/categories.repository.js';
+import { TransactionType } from '../categories/entities/category.entity.js';
 import { compare, hash } from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from './dto/create-user.dto.js';
 import { AuthServiceContract } from './interface/auth.service.interface.js';
 
-const DEFAULT_CATEGORIES: CategoryData[] = [
+const DEFAULT_CATEGORIES: CreateCategoryData[] = [
   // Income
-  { name: 'Salário', icon: 'salary', type: 'INCOME' },
-  { name: 'Freelance', icon: 'freelance', type: 'INCOME' },
-  { name: 'Outro', icon: 'other', type: 'INCOME' },
+  { name: 'Salário', icon: 'salary', type: TransactionType.INCOME },
+  { name: 'Freelance', icon: 'freelance', type: TransactionType.INCOME },
+  { name: 'Outro', icon: 'other', type: TransactionType.INCOME },
   // Expense
-  { name: 'Casa', icon: 'home', type: 'EXPENSE' },
-  { name: 'Alimentação', icon: 'food', type: 'EXPENSE' },
-  { name: 'Educação', icon: 'education', type: 'EXPENSE' },
-  { name: 'Lazer', icon: 'fun', type: 'EXPENSE' },
-  { name: 'Mercado', icon: 'grocery', type: 'EXPENSE' },
-  { name: 'Roupas', icon: 'clothes', type: 'EXPENSE' },
-  { name: 'Transporte', icon: 'transport', type: 'EXPENSE' },
-  { name: 'Viagem', icon: 'travel', type: 'EXPENSE' },
-  { name: 'Outro', icon: 'other', type: 'EXPENSE' },
+  { name: 'Casa', icon: 'home', type: TransactionType.EXPENSE },
+  { name: 'Alimentação', icon: 'food', type: TransactionType.EXPENSE },
+  { name: 'Educação', icon: 'education', type: TransactionType.EXPENSE },
+  { name: 'Lazer', icon: 'fun', type: TransactionType.EXPENSE },
+  { name: 'Mercado', icon: 'grocery', type: TransactionType.EXPENSE },
+  { name: 'Roupas', icon: 'clothes', type: TransactionType.EXPENSE },
+  { name: 'Transporte', icon: 'transport', type: TransactionType.EXPENSE },
+  { name: 'Viagem', icon: 'travel', type: TransactionType.EXPENSE },
+  { name: 'Outro', icon: 'other', type: TransactionType.EXPENSE },
 ];
 
 @Injectable()
