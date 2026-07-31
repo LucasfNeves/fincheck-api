@@ -4,7 +4,7 @@ import {
   CreateUserData,
   UserProfile,
   UsersRepository,
-} from '../interfaces/users-repository.js';
+} from '../interfaces/users.repository.js';
 import { PrismaService } from '../../prisma.service.js';
 
 @Injectable()

@@ -7,11 +7,11 @@ import { AuthenticateDto } from './dto/authenticate.dto.js';
 import {
   CategoryData,
   UsersRepository,
-} from '../../shared/database/repositories/interfaces/users-repository.js';
+} from '../../shared/database/repositories/interfaces/users.repository.js';
 import { compare, hash } from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from './dto/create-user.dto.js';
-import { ActiveUserId } from 'src/shared/decorators/ActiveUserId.js';
+import { AuthServiceContract } from './interface/auth.service.interface.js';
 
 const DEFAULT_CATEGORIES: CategoryData[] = [
   // Income
@@ -31,7 +31,7 @@ const DEFAULT_CATEGORIES: CategoryData[] = [
 ];
 
 @Injectable()
-export class AuthService {
+export class AuthService implements AuthServiceContract {
   constructor(
     private readonly usersRepository: UsersRepository,
     private readonly jwtService: JwtService,

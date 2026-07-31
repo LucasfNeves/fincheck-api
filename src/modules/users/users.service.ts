@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { UsersRepository } from '../../shared/database/repositories/interfaces/users-repository.js';
+import { UsersRepository } from '../../shared/database/repositories/interfaces/users.repository.js';
 import { UsersServiceContract } from './interface/user.service.interface.js';
 
 @Injectable()

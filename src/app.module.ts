@@ -4,9 +4,10 @@ import { DatabaseModule } from './shared/database/database.module.js';
 import { AuthModule } from './modules/auth/auth.module.js';
 import { AuthGuard } from './modules/auth/guards/auth.guard.js';
 import { APP_GUARD } from '@nestjs/core';
+import { CategoriesModule } from './modules/categories/categories.module.js';
 
 @Module({
-  imports: [DatabaseModule, UsersModule, AuthModule],
+  imports: [DatabaseModule, UsersModule, AuthModule, CategoriesModule],
   controllers: [],
   providers: [
     {
