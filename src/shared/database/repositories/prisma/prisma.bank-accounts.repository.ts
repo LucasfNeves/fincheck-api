@@ -59,4 +59,16 @@ export class PrismaBankAccountsRepository implements BankAccountsRepositoryContr
   async delete(id: string): Promise<void> {
     await this.prismaService.bankAccount.delete({ where: { id } });
   }
+
+  async findOneByUserIdAndBankAccountId(
+    userId: string,
+    bankAccountId: string,
+  ): Promise<BankAccount | null> {
+    const banckAccount = await this.prismaService.bankAccount.findFirst({
+      where: { userId, id: bankAccountId },
+      select: BANK_ACCOUNT_SELECT,
+    });
+
+    return banckAccount as BankAccount | null;
+  }
 }

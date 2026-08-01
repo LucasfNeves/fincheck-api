@@ -1,8 +1,4 @@
-import {
-  ForbiddenException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { BankAccountsRepositoryContract } from 'src/shared/database/repositories/interfaces/bank-accounts.repository.js';
 import { CreateBankAccountDto } from './dto/create-bank-account.dto.js';
 import { UpdateBankAccountDto } from './dto/update-bank-account.dto.js';
@@ -59,17 +55,16 @@ export class BankAccountsService implements BankAccountsServiceContract {
     userId: string,
     bankAccountId: string,
   ): Promise<BankAccount> {
-    const bankAccount =
-      await this.bankAccountsRepository.findById(bankAccountId);
+    const isOwner =
+      await this.bankAccountsRepository.findOneByUserIdAndBankAccountId(
+        userId,
+        bankAccountId,
+      );
 
-    if (!bankAccount) {
+    if (!isOwner) {
       throw new NotFoundException('Bank account not found');
     }
 
-    if (bankAccount.userId !== userId) {
-      throw new ForbiddenException('This bank account belongs to another user');
-    }
-
-    return bankAccount;
+    return isOwner;
   }
 }

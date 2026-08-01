@@ -22,4 +22,9 @@ export abstract class BankAccountsRepositoryContract {
   ): Promise<BankAccount>;
 
   abstract delete(id: string): Promise<void>;
+
+  abstract findOneByUserIdAndBankAccountId(
+    userId: string,
+    bankAccountId: string,
+  ): Promise<BankAccount | null>;
 }
