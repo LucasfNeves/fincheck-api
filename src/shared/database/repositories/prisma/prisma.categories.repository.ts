@@ -23,4 +23,16 @@ export class PrismaCategoriesRepository implements CategoriesRepositoryContract 
 
     return categories as Category[];
   }
+
+  async findOneByUserIdAndCategoryId(
+    userId: string,
+    categoryId: string,
+  ): Promise<Category | null> {
+    const category = await this.prismaService.category.findFirst({
+      where: { userId, id: categoryId },
+      select: CATEGORY_SELECT,
+    });
+
+    return category as Category | null;
+  }
 }

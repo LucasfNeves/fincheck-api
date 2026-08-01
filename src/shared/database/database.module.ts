@@ -2,10 +2,12 @@ import { Global, Module } from '@nestjs/common';
 import { UsersRepository } from './repositories/interfaces/users.repository.js';
 import { CategoriesRepositoryContract } from './repositories/interfaces/categories.repository.js';
 import { BankAccountsRepositoryContract } from './repositories/interfaces/bank-accounts.repository.js';
+import { TransactionsRepositoryContract } from './repositories/interfaces/transactions.repository.js';
 import { PrismaService } from './prisma.service.js';
 import { PrismaUsersRepository } from './repositories/prisma/prisma.users.repository.js';
 import { PrismaCategoriesRepository } from './repositories/prisma/prisma.categories.repository.js';
 import { PrismaBankAccountsRepository } from './repositories/prisma/prisma.bank-accounts.repository.js';
+import { PrismaTransactionsRepository } from './repositories/prisma/prisma.transactions.repository.js';
 
 @Global()
 @Module({
@@ -20,11 +22,16 @@ import { PrismaBankAccountsRepository } from './repositories/prisma/prisma.bank-
       provide: BankAccountsRepositoryContract,
       useClass: PrismaBankAccountsRepository,
     },
+    {
+      provide: TransactionsRepositoryContract,
+      useClass: PrismaTransactionsRepository,
+    },
   ],
   exports: [
     UsersRepository,
     CategoriesRepositoryContract,
     BankAccountsRepositoryContract,
+    TransactionsRepositoryContract,
   ],
 })
 export class DatabaseModule {}

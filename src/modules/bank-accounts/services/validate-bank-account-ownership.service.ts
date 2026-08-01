@@ -1,13 +1,13 @@
 import { BankAccountsRepositoryContract } from 'src/shared/database/repositories/interfaces/bank-accounts.repository.js';
 import { ValidateBankAccountOwnershipServiceContract } from '../interface/validate-bank-account-ownership.service.interface.js';
-import { BankAccount } from '../entities/bank-account.entity.js';
-import { NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
+@Injectable()
 export class ValidateBankAccountOwnershipService implements ValidateBankAccountOwnershipServiceContract {
   constructor(
     private readonly bankAccountsRepository: BankAccountsRepositoryContract,
   ) {}
-  async validate(userId: string, bankAccountId: string): Promise<BankAccount> {
+  async validate(userId: string, bankAccountId: string): Promise<void> {
     const isOwner =
       await this.bankAccountsRepository.findOneByUserIdAndBankAccountId(
         userId,
@@ -17,7 +17,5 @@ export class ValidateBankAccountOwnershipService implements ValidateBankAccountO
     if (!isOwner) {
       throw new NotFoundException('Bank account not found');
     }
-
-    return isOwner;
   }
 }

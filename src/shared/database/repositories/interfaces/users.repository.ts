@@ -8,7 +8,7 @@ export interface CreateUserData {
   categories: CreateCategoryData[];
 }
 
-export type UserProfile = Pick<User, 'name' | 'email'>;
+export type UserProfile = Pick<User, 'id' | 'name' | 'email'>;
 
 export abstract class UsersRepository {
   abstract emailExists(email: string): Promise<boolean>;

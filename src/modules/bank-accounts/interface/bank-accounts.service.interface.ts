@@ -10,8 +10,6 @@ export abstract class BankAccountsServiceContract {
 
   abstract findAll(userId: string): Promise<BankAccount[]>;
 
-  abstract findOne(userId: string, bankAccountId: string): Promise<BankAccount>;
-
   abstract update(
     userId: string,
     bankAccountId: string,

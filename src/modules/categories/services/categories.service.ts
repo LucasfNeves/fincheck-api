@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CategoriesContract } from './interface/categories.interface.js';
+import { CategoriesContract } from '../interface/categories.interface.js';
 import { UsersRepository } from 'src/shared/database/repositories/interfaces/users.repository.js';
 import { CategoriesRepositoryContract } from 'src/shared/database/repositories/interfaces/categories.repository.js';
-import { Category } from './entities/category.entity.js';
+import { Category } from '../entities/category.entity.js';
 
 @Injectable()
 export class CategoriesService implements CategoriesContract {

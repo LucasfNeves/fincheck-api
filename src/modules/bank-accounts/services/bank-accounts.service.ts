@@ -29,13 +29,6 @@ export class BankAccountsService implements BankAccountsServiceContract {
     return this.bankAccountsRepository.findManyByUserId(userId);
   }
 
-  findOne(userId: string, bankAccountId: string): Promise<BankAccount> {
-    return this.validateBankAccountOwnershipService.validate(
-      userId,
-      bankAccountId,
-    );
-  }
-
   async update(
     userId: string,
     bankAccountId: string,

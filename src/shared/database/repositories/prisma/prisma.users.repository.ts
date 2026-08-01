@@ -50,7 +50,7 @@ export class PrismaUsersRepository implements UsersRepository {
   async findProfileById(userId: string): Promise<UserProfile | null> {
     const user = await this.prismaService.user.findUnique({
       where: { id: userId },
-      select: { name: true, email: true },
+      select: { name: true, email: true, id: true },
     });
 
     return user;

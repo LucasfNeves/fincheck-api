@@ -34,14 +34,6 @@ export class BankAccountsController {
     return this.bankAccountsService.findAll(userId);
   }
 
-  @Get(':bankAccountId')
-  findOne(
-    @ActiveUserId() userId: string,
-    @Param('bankAccountId', ParseUUIDPipe) bankAccountId: string,
-  ) {
-    return this.bankAccountsService.findOne(userId, bankAccountId);
-  }
-
   @Put(':bankAccountId')
   update(
     @ActiveUserId() userId: string,

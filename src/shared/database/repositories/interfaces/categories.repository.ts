@@ -4,4 +4,9 @@ export type CreateCategoryData = Pick<Category, 'name' | 'icon' | 'type'>;
 
 export abstract class CategoriesRepositoryContract {
   abstract findAllCategories(userId: string): Promise<Category[]>;
+
+  abstract findOneByUserIdAndCategoryId(
+    userId: string,
+    categoryId: string,
+  ): Promise<Category | null>;
 }

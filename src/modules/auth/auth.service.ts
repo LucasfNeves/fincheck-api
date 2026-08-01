@@ -6,11 +6,11 @@ import {
 import { AuthenticateDto } from './dto/authenticate.dto.js';
 import { UsersRepository } from '../../shared/database/repositories/interfaces/users.repository.js';
 import { CreateCategoryData } from '../../shared/database/repositories/interfaces/categories.repository.js';
-import { TransactionType } from '../categories/entities/category.entity.js';
 import { compare, hash } from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from './dto/create-user.dto.js';
 import { AuthServiceContract } from './interface/auth.service.interface.js';
+import { TransactionType } from '../transactions/entities/transactions.entities.js';
 
 const DEFAULT_CATEGORIES: CreateCategoryData[] = [
   // Income
