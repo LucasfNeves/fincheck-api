@@ -3,7 +3,10 @@ import { TransactionsRepositoryContract } from 'src/shared/database/repositories
 import { ValidateBankAccountOwnershipServiceContract } from '../bank-accounts/interface/validate-bank-account-ownership.service.interface.js';
 import { CreateTransactionDto } from './dto/create-transaction.dto.js';
 import { UpdateTransactionDto } from './dto/update-transaction.dto.js';
-import { Transaction } from './entities/transactions.entities.js';
+import {
+  Transaction,
+  TransactionType,
+} from './entities/transactions.entities.js';
 import { TransactionsServiceContract } from './interface/transactions.service.interface.js';
 import { ValidateCategoryOwnershipServiceContract } from '../categories/interface/validate-category-ownership.interface.js';
 
@@ -41,7 +44,12 @@ export class TransactionsService implements TransactionsServiceContract {
 
   findAllByUserId(
     userId: string,
-    filters: { month: number; year: number; bankAccountId?: string },
+    filters: {
+      month: number;
+      year: number;
+      bankAccountId?: string;
+      type?: TransactionType;
+    },
   ): Promise<Transaction[]> {
     return this.transactionsRepository.findManyByUserId(userId, filters);
   }

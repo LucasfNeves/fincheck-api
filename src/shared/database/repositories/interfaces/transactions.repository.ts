@@ -1,4 +1,7 @@
-import { Transaction } from 'src/modules/transactions/entities/transactions.entities.js';
+import {
+  Transaction,
+  TransactionType,
+} from 'src/modules/transactions/entities/transactions.entities.js';
 
 export type CreateTransactionData = Pick<
   Transaction,
@@ -14,7 +17,12 @@ export abstract class TransactionsRepositoryContract {
 
   abstract findManyByUserId(
     userId: string,
-    filters: { month: number; year: number; bankAccountId?: string },
+    filters: {
+      month: number;
+      year: number;
+      bankAccountId?: string;
+      type?: TransactionType;
+    },
   ): Promise<Transaction[]>;
 
   abstract findFirstById(id: string): Promise<Transaction | null>;

@@ -5,7 +5,10 @@ import {
   TransactionsRepositoryContract,
   UpdateTransactionData,
 } from '../interfaces/transactions.repository.js';
-import { Transaction } from 'src/modules/transactions/entities/transactions.entities.js';
+import {
+  Transaction,
+  TransactionType,
+} from 'src/modules/transactions/entities/transactions.entities.js';
 
 const TRANSACTIONS_SELECT = {
   id: true,
@@ -33,7 +36,12 @@ export class PrismaTransactionsRepository implements TransactionsRepositoryContr
 
   async findManyByUserId(
     userId: string,
-    filters: { month: number; year: number; bankAccountId?: string },
+    filters: {
+      month: number;
+      year: number;
+      bankAccountId?: string;
+      type?: TransactionType;
+    },
   ): Promise<Transaction[]> {
     const transactions = await this.prismaService.transaction.findMany({
       where: {
@@ -42,6 +50,7 @@ export class PrismaTransactionsRepository implements TransactionsRepositoryContr
           gte: new Date(Date.UTC(filters.year, filters.month)),
           lt: new Date(Date.UTC(filters.year, filters.month + 1)),
         },
+        type: filters.type ? filters.type : undefined,
         bankAccountId: filters.bankAccountId
           ? filters.bankAccountId
           : undefined,
