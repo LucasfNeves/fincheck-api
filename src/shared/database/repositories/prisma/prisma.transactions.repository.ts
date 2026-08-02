@@ -19,9 +19,7 @@ const TRANSACTIONS_SELECT = {
 } as const;
 
 @Injectable()
-export class PrismaTransactionsRepository
-  implements TransactionsRepositoryContract
-{
+export class PrismaTransactionsRepository implements TransactionsRepositoryContract {
   constructor(private readonly prismaService: PrismaService) {}
 
   async create(data: CreateTransactionData): Promise<Transaction> {
@@ -33,9 +31,21 @@ export class PrismaTransactionsRepository
     return transaction as Transaction;
   }
 
-  async findManyByUserId(userId: string): Promise<Transaction[]> {
+  async findManyByUserId(
+    userId: string,
+    filters: { month: number; year: number; bankAccountId?: string },
+  ): Promise<Transaction[]> {
     const transactions = await this.prismaService.transaction.findMany({
-      where: { userId },
+      where: {
+        userId,
+        date: {
+          gte: new Date(Date.UTC(filters.year, filters.month)),
+          lt: new Date(Date.UTC(filters.year, filters.month + 1)),
+        },
+        bankAccountId: filters.bankAccountId
+          ? filters.bankAccountId
+          : undefined,
+      },
       select: TRANSACTIONS_SELECT,
     });
 
@@ -63,10 +73,7 @@ export class PrismaTransactionsRepository
     return transaction as Transaction | null;
   }
 
-  async update(
-    id: string,
-    data: UpdateTransactionData,
-  ): Promise<Transaction> {
+  async update(id: string, data: UpdateTransactionData): Promise<Transaction> {
     const transaction = await this.prismaService.transaction.update({
       where: { id },
       data,

@@ -12,7 +12,10 @@ export type UpdateTransactionData = Partial<
 export abstract class TransactionsRepositoryContract {
   abstract create(data: CreateTransactionData): Promise<Transaction>;
 
-  abstract findManyByUserId(userId: string): Promise<Transaction[]>;
+  abstract findManyByUserId(
+    userId: string,
+    filters: { month: number; year: number; bankAccountId?: string },
+  ): Promise<Transaction[]>;
 
   abstract findFirstById(id: string): Promise<Transaction | null>;
 

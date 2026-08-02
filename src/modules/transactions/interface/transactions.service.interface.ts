@@ -8,7 +8,10 @@ export abstract class TransactionsServiceContract {
     createTransactionDto: CreateTransactionDto,
   ): Promise<Transaction>;
 
-  abstract findAllByUserId(userId: string): Promise<Transaction[]>;
+  abstract findAllByUserId(
+    userId: string,
+    filters: { month: number; year: number; bankAccountId?: string },
+  ): Promise<Transaction[]>;
 
   abstract update(
     userId: string,

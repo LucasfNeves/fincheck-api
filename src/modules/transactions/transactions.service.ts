@@ -39,8 +39,11 @@ export class TransactionsService implements TransactionsServiceContract {
     });
   }
 
-  findAllByUserId(userId: string): Promise<Transaction[]> {
-    return this.transactionsRepository.findManyByUserId(userId);
+  findAllByUserId(
+    userId: string,
+    filters: { month: number; year: number; bankAccountId?: string },
+  ): Promise<Transaction[]> {
+    return this.transactionsRepository.findManyByUserId(userId, filters);
   }
 
   async update(
