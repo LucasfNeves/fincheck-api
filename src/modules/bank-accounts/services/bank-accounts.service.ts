@@ -28,8 +28,8 @@ export class BankAccountsService implements BankAccountsServiceContract {
   async findAll(userId: string): Promise<BankAccount[]> {
     const bankAccounts = await this.bankAccountsRepository.findManyByUserId(userId);
 
-    const bankAccountsWithBalance = bankAccounts.map((bankAccount) => {
-      const balance = bankAccount.transactions?.reduce((acc, transaction) => {
+    const bankAccountsWithBalance = bankAccounts.map(({transactions, ...bankAccount}) => {
+      const balance = transactions?.reduce((acc, transaction) => {
         if (transaction.type === 'INCOME') {
           return acc + transaction.value;
         } else if (transaction.type === 'EXPENSE') {
