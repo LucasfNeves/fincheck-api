@@ -25,8 +25,26 @@ export class BankAccountsService implements BankAccountsServiceContract {
     });
   }
 
-  findAll(userId: string): Promise<BankAccount[]> {
-    return this.bankAccountsRepository.findManyByUserId(userId);
+  async findAll(userId: string): Promise<BankAccount[]> {
+    const bankAccounts = await this.bankAccountsRepository.findManyByUserId(userId);
+
+    const bankAccountsWithBalance = bankAccounts.map((bankAccount) => {
+      const balance = bankAccount.transactions?.reduce((acc, transaction) => {
+        if (transaction.type === 'INCOME') {
+          return acc + transaction.value;
+        } else if (transaction.type === 'EXPENSE') {
+          return acc - transaction.value;
+        }
+        return acc;
+      }, bankAccount.initialBalance);
+
+      return {
+        ...bankAccount,
+        currentBalance: balance ?? bankAccount.initialBalance,
+      };
+    });
+
+    return bankAccountsWithBalance;
   }
 
   async update(

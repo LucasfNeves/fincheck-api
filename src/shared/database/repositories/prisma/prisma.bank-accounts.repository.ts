@@ -31,7 +31,15 @@ export class PrismaBankAccountsRepository implements BankAccountsRepositoryContr
   async findManyByUserId(userId: string): Promise<BankAccount[]> {
     const bankAccounts = await this.prismaService.bankAccount.findMany({
       where: { userId },
-      select: BANK_ACCOUNT_SELECT,
+      select: {
+        ...BANK_ACCOUNT_SELECT,
+        transactions: {
+          select: {
+            type: true,
+            value: true,
+          }
+        }
+      },
     });
 
     return bankAccounts as BankAccount[];

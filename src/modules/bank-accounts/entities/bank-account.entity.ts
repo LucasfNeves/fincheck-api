@@ -1,3 +1,5 @@
+import { Transaction } from 'src/modules/transactions/entities/transactions.entities.js';
+
 export enum BankAccountType {
   CHECKING = 'CHECKING',
   INVESTMENT = 'INVESTMENT',
@@ -10,4 +12,6 @@ export interface BankAccount {
   name: string;
   initialBalance: number;
   type: BankAccountType;
+  currentBalance: number;
+  transactions?: Transaction[];
 }
